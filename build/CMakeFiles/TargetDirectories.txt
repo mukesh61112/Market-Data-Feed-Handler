@@ -1,0 +1,8 @@
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/exchange_simulator.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/feed_handler.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/edit_cache.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/rebuild_cache.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/list_install_components.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/install.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/install/local.dir
+/workspaces/Market-Data-Feed-Handler/build/CMakeFiles/install/strip.dir

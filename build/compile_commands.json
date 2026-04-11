@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/workspaces/Market-Data-Feed-Handler/build",
+  "command": "/usr/bin/c++  -I/workspaces/Market-Data-Feed-Handler/include -O3 -DNDEBUG -std=gnu++17 -O3 -march=native -Wall -Wextra -Wpedantic -Wno-unused-result -pthread -o CMakeFiles/exchange_simulator.dir/src/server/exchange_simulator.cpp.o -c /workspaces/Market-Data-Feed-Handler/src/server/exchange_simulator.cpp",
+  "file": "/workspaces/Market-Data-Feed-Handler/src/server/exchange_simulator.cpp",
+  "output": "CMakeFiles/exchange_simulator.dir/src/server/exchange_simulator.cpp.o"
+},
+{
+  "directory": "/workspaces/Market-Data-Feed-Handler/build",
+  "command": "/usr/bin/c++  -I/workspaces/Market-Data-Feed-Handler/include -O3 -DNDEBUG -std=gnu++17 -O3 -march=native -Wall -Wextra -Wpedantic -Wno-unused-result -pthread -o CMakeFiles/feed_handler.dir/src/client/feed_handler.cpp.o -c /workspaces/Market-Data-Feed-Handler/src/client/feed_handler.cpp",
+  "file": "/workspaces/Market-Data-Feed-Handler/src/client/feed_handler.cpp",
+  "output": "CMakeFiles/feed_handler.dir/src/client/feed_handler.cpp.o"
+},
+{
+  "directory": "/workspaces/Market-Data-Feed-Handler/build",
+  "command": "/usr/bin/c++  -I/workspaces/Market-Data-Feed-Handler/include -O3 -DNDEBUG -std=gnu++17 -O3 -march=native -Wall -Wextra -Wpedantic -Wno-unused-result -pthread -o CMakeFiles/feed_handler.dir/src/client/socket.cpp.o -c /workspaces/Market-Data-Feed-Handler/src/client/socket.cpp",
+  "file": "/workspaces/Market-Data-Feed-Handler/src/client/socket.cpp",
+  "output": "CMakeFiles/feed_handler.dir/src/client/socket.cpp.o"
+},
+{
+  "directory": "/workspaces/Market-Data-Feed-Handler/build",
+  "command": "/usr/bin/c++  -I/workspaces/Market-Data-Feed-Handler/include -O3 -DNDEBUG -std=gnu++17 -O3 -march=native -Wall -Wextra -Wpedantic -Wno-unused-result -pthread -o CMakeFiles/feed_handler.dir/src/client/parser.cpp.o -c /workspaces/Market-Data-Feed-Handler/src/client/parser.cpp",
+  "file": "/workspaces/Market-Data-Feed-Handler/src/client/parser.cpp",
+  "output": "CMakeFiles/feed_handler.dir/src/client/parser.cpp.o"
+},
+{
+  "directory": "/workspaces/Market-Data-Feed-Handler/build",
+  "command": "/usr/bin/c++  -I/workspaces/Market-Data-Feed-Handler/include -O3 -DNDEBUG -std=gnu++17 -O3 -march=native -Wall -Wextra -Wpedantic -Wno-unused-result -pthread -o CMakeFiles/feed_handler.dir/src/client/visualizer.cpp.o -c /workspaces/Market-Data-Feed-Handler/src/client/visualizer.cpp",
+  "file": "/workspaces/Market-Data-Feed-Handler/src/client/visualizer.cpp",
+  "output": "CMakeFiles/feed_handler.dir/src/client/visualizer.cpp.o"
+}
+]

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/feed_handler.dir/src/client/feed_handler.cpp.o CMakeFiles/feed_handler.dir/src/client/socket.cpp.o CMakeFiles/feed_handler.dir/src/client/parser.cpp.o CMakeFiles/feed_handler.dir/src/client/visualizer.cpp.o -o feed_handler  -lpthread 

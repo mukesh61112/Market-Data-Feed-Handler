@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/exchange_simulator.dir/src/server/exchange_simulator.cpp.o -o exchange_simulator  -lpthread 
