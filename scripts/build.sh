@@ -19,7 +19,6 @@ echo ""
 info "Project root : $ROOT"
 info "Build dir : $BUILD_DIR"
 echo ""
-# ■■ Check dependencies ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 info "Checking dependencies..."
 command -v cmake &>/dev/null || die "cmake not found. Install: sudo apt install cmake"
 command -v g++ &>/dev/null || die "g++ not found. Install: sudo apt install g++"
@@ -28,12 +27,10 @@ GCC_VER=$(g++ -dumpversion | cut -d. -f1)
 (( GCC_VER >= 9 )) || die "g++ version $GCC_VER is too old. Need >= 9 for C++17."
 ok "g++ $GCC_VER | cmake $(cmake --version | head -1 | awk '{print $3}') | make $(make --version | head -1 |
  awk '{print $3}')"
-# ■■ Optional clean ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 if [[ "${1:-}" == "--clean" ]]; then
  warn "Cleaning $BUILD_DIR ..."
  rm -rf "$BUILD_DIR"
 fi
-# ■■ CMake configure ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 info "Configuring CMake (Release) ..."
 mkdir -p "$BUILD_DIR"
 cmake -S "$ROOT" -B "$BUILD_DIR" \
@@ -44,7 +41,6 @@ if [ $CMAKE_RC -ne 0 ]; then
  die "CMake configuration failed (exit $CMAKE_RC). Check output above."
 fi
 ok "CMake configuration done"
-# ■■ Compile ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 NPROC=$(nproc 2>/dev/null || echo 4)
 info "Compiling with $NPROC parallel jobs ..."
 cmake --build "$BUILD_DIR" --parallel "$NPROC"
@@ -52,7 +48,6 @@ BUILD_RC=$?
 if [ $BUILD_RC -ne 0 ]; then
  die "Compilation failed (exit $BUILD_RC). Check errors above."
 fi
-# ■■ Done ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 echo ""
 ok "Build complete!"
 echo ""

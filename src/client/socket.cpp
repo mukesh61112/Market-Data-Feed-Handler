@@ -1,4 +1,4 @@
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 
 // socket.cpp – Non-blocking TCP client socket for the market data feed
 //
 // Features:
@@ -7,7 +7,7 @@
 // • TCP_NODELAY + 4 MB receive buffer
 // • Partial-read handling
 // • Silent-drop detection via heartbeat timeout
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 
 #include "../include/socket.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <chrono>
 #include <thread>
-// ■■■ MarketDataSocket implementation ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  MarketDataSocket implementation 
 bool MarketDataSocket::connect(const std::string& host, uint16_t port,
  uint32_t timeout_ms) {
  host_ = host;

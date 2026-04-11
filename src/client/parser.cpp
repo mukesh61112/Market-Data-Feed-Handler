@@ -1,4 +1,4 @@
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 
 // parser.cpp – Zero-copy binary message parser
 //
 // Handles:
@@ -6,12 +6,12 @@
 // • Sequence gap detection
 // • Checksum validation
 // • No dynamic memory allocation in hot path
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 
 #include "../include/parser.h"
 #include "../include/protocol.h"
 #include <cstring>
 #include <cstdio>
-// ■■■ MessageParser implementation ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  MessageParser implementation 
 void MessageParser::feed(const uint8_t* data, size_t len,
  ParseCallback cb) {
  // Append incoming bytes to ring buffer

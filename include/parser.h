@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 #include <functional>
-// ■■■ Parsed message (union variant) ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//Parsed message (union variant)
 struct ParsedMessage {
  uint16_t type;
  uint32_t seq_num;

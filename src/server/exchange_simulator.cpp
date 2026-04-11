@@ -1,4 +1,4 @@
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 
 // exchange_simulator.cpp
 //
 // TCP Server (epoll-based) that generates realistic NSE market data ticks
@@ -6,7 +6,7 @@
 //
 // Build: see CMakeLists.txt
 // Run : ./exchange_simulator [port] [num_symbols] [tick_rate]
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// 
 #include "../include/protocol.h"
 #include <sys/epoll.h>
 #include <sys/socket.h>
@@ -30,14 +30,14 @@
 #include <thread>
 #include <chrono>
 #include <cassert>
-// ■■■ Symbol State ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  Symbol State 
 struct SymbolState {
  double price; // current mid price
  double mu; // drift
  double sigma; // volatility
  double spread_pct; // bid-ask spread as fraction of price
 };
-// ■■■ Box-Muller normal random ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  Box-Muller normal random 
 static double box_muller(std::mt19937_64& rng) {
  static thread_local double spare;
  static thread_local bool has_spare = false;
@@ -49,19 +49,19 @@ static double box_muller(std::mt19937_64& rng) {
  has_spare = true;
  return mag * std::sin(2.0 * M_PI * u2);
 }
-// ■■■ GBM step ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  GBM step 
 // S(t+dt) = S(t) * exp((mu - 0.5*sigma^2)*dt + sigma*sqrt(dt)*Z)
 static double gbm_step(double S, double mu, double sigma,
  double dt, std::mt19937_64& rng) {
  double z = box_muller(rng);
  return S * std::exp((mu - 0.5 * sigma * sigma) * dt + sigma * std::sqrt(dt) * z);
 }
-// ■■■ Make non-blocking ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  Make non-blocking 
 static void set_nonblocking(int fd) {
  int flags = fcntl(fd, F_GETFL, 0);
  fcntl(fd, F_SETFL, flags | O_NONBLOCK);
 }
-// ■■■ ExchangeSimulator ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  ExchangeSimulator 
 class ExchangeSimulator {
 public:
  explicit ExchangeSimulator(uint16_t port, size_t num_symbols = 100,
@@ -122,7 +122,7 @@ public:
  void enable_fault_injection(bool e) { fault_inject_ = e; }
  void stop() { running_.store(false); }
 private:
- // ■■ Symbol initialisation ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ //  Symbol initialisation 
  void init_symbols() {
  std::uniform_real_distribution<double> price_dist(100.0, 5000.0);
  std::uniform_real_distribution<double> sigma_dist(0.01, 0.06);
@@ -135,7 +135,7 @@ private:
  symbols_[i].spread_pct = spread_dist(rng_);
  }
  }
- // ■■ Accept new TCP connection ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ //  Accept new TCP connection 
  void handle_new_connection() {
  sockaddr_in cli{};
  socklen_t len = sizeof(cli);
@@ -159,7 +159,7 @@ private:
  printf("[Server] Client connected fd=%d total=%zu\n",
  cfd, clients_.size());
  }
- // ■■ Remove disconnected client ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ // ■■ Remove disconnected client 
  void handle_client_disconnect(int fd) {
  epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
  close(fd);
@@ -169,7 +169,7 @@ private:
  printf("[Server] Client disconnected fd=%d remaining=%zu\n",
  fd, clients_.size());
  }
- // ■■ Broadcast raw bytes to all clients ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ // ■■ Broadcast raw bytes to all clients 
  void broadcast_message(const void* data, size_t len) {
  std::lock_guard<std::mutex> lk(clients_mtx_);
  std::vector<int> bad;
@@ -197,7 +197,7 @@ private:
  clients_.end());
  }
  }
- // ■■ Generate one tick for symbol_id ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ //  Generate one tick for symbol_id 
  void generate_tick(uint16_t symbol_id) {
  auto& sym = symbols_[symbol_id];
  constexpr double dt = 0.001; // 1 ms time step
@@ -235,7 +235,7 @@ private:
  broadcast_message(&msg, sizeof(msg));
  }
  }
- // ■■ Tick generation loop (runs in separate thread) ■■■■■■■■■■■■■■■■■■■■■■■■
+ //  Tick generation loop (runs in separate thread) 
  void tick_loop() {
  using clock = std::chrono::steady_clock;
  using ns = std::chrono::nanoseconds;
@@ -264,7 +264,7 @@ private:
  }
  }
  }
- // ■■ Data members ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+ //  Data members 
  uint16_t port_;
  size_t num_symbols_;
  std::atomic<uint32_t> tick_rate_;
@@ -278,7 +278,7 @@ private:
  std::vector<int> clients_;
  std::mutex clients_mtx_;
 };
-// ■■■ main ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+//  main 
 int main(int argc, char* argv[]) {
  uint16_t port = (argc > 1) ? (uint16_t)atoi(argv[1]) : 9876;
  size_t num_symbols = (argc > 2) ? (size_t)atoi(argv[2]) : 100;

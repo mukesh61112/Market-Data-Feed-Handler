@@ -32,7 +32,7 @@ class SymbolCache {
 public:
     SymbolCache() : slots_(std::make_unique<CacheSlot[]>(MAX_SYMBOLS)) {}
 
-    // ── Writer (single writer thread) ───────────────────────────────────────
+    // Writer (single writer thread)
     void updateBid(uint16_t sym, double price, uint32_t qty, uint64_t ts) {
         auto& slot = slots_[sym];
         uint64_t s = slot.seq.load(std::memory_order_relaxed);
@@ -72,7 +72,7 @@ public:
         slot.seq.store(s + 2, std::memory_order_release);
     }
 
-    // ── Reader (lock-free, any thread) ───────────────────────────────────────
+    //Reader (lock-free, any thread)
     MarketState getSnapshot(uint16_t sym) const {
         const auto& slot = slots_[sym];
         MarketState snap{};
