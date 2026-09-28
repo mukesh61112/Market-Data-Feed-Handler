@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <cstddef>
 
+//ExchangeSimulator Class
 class ExchangeSimulator {
 public:
     ExchangeSimulator(uint16_t port, size_t num_symbols = 100);

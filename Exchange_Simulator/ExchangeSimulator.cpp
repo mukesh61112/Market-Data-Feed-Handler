@@ -12,6 +12,8 @@
 #include <ctime>
 
 // ------------------ Constructor ------------------
+// diff typee constructor 
+
 ExchangeSimulator::ExchangeSimulator(uint16_t p, size_t n)
     : port(p), num_symbols(n), tick_rate(10000), fault_injection(false) {
 
